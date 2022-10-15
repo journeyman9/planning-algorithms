@@ -19,7 +19,7 @@ g++ -std=c++17 main.cpp node.cpp -o main
 
 Plot the optimal path on the grid.
 ```cmd
-ptyhon plot_path.py
+python plot_path.py
 ```
 
 # Dependencies and Acknowledgements
