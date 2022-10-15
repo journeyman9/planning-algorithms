@@ -22,5 +22,10 @@ Node::Node(int x, int y) {
 }
 
 Node::~Node() {
+    delete this->parent;
 
+    for (auto ptr: this->neighbors) {
+        delete ptr;
+    }
+    this->neighbors.clear();
 }
