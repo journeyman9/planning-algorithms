@@ -9,10 +9,9 @@ public:
     int cost;
 
     std::vector<Node*> neighbors;
-    Node* parent;
+    Node *parent;
 
     Node();
     Node(int x, int y);
-    Node(int, int, std::string);
     ~Node();
 };

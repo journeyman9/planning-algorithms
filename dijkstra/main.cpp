@@ -2,7 +2,7 @@
 #include "node.h"
 #include <vector>
 #include <queue>
-#include <unordered_map>
+#include <map>
 #include <fstream>
 #include <chrono>
 #include <climits>
@@ -104,7 +104,7 @@ int main(int argc, char const *argv[]) {
     auto t0 = std::chrono::high_resolution_clock::now();
 
     std::queue<Node*> Q;
-    std::unordered_map<Node*, int> visited, unvisited;
+    std::map<Node*, int> visited, unvisited;
     Node *start_node = map[start[1]][start[0]];
     Node *goal_node = map[goal[1]][goal[0]];
     Node *current;
