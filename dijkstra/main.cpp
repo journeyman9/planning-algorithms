@@ -159,7 +159,6 @@ int main(int argc, char const *argv[]) {
                 // Do nothing
             }
             else {
-                std::cout << "ha" << std::endl;
                 delete map[y][x];
             }
         }
