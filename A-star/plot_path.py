@@ -40,6 +40,6 @@ if __name__ == "__main__":
     ax.scatter(df_visit["x"], df_visit["y"], color='red', alpha=0.05)
     ax.imshow(graph, cmap=plt.cm.Dark2)
     ax.scatter(start[1], start[0], marker='*', color='blue', s=200)
-    ax.scatter(goal[1], goal[0], marker='*', color='green', s=200)
+    ax.scatter(goal[1], goal[0], marker='*', color='yellow', s=200)
     ax.plot(df["x"], df["y"], color='black')
     plt.show()
