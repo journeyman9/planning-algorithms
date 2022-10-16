@@ -110,7 +110,8 @@ int main(int argc, char const *argv[]) {
     Node *current;
     Q.push(start_node);
 
-    while (Q.size()) {
+    bool goal_found = false;
+    while ((Q.size()) && (!goal_found)) {
         current = Q.front();
         Q.pop();
 
@@ -125,6 +126,12 @@ int main(int argc, char const *argv[]) {
                     Q.push(n);
                     ++unvisited[n];
                 }
+            }
+            
+            if (n == goal_node) {
+                std::cout << "Goal found!" << std::endl;
+                goal_found ^= true;
+                break;
             }
         }
 
