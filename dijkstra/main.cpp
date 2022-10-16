@@ -152,6 +152,20 @@ int main(int argc, char const *argv[]) {
     std::chrono::duration<float> duration = t1 - t0;
     std::cout << "Time: " << duration.count() << "s" << std::endl;
 
+    // Delete ptrs in map
+    for (int x=0; x<map_width; ++x) {
+        for (int y=0; y<map_height; ++y) {
+            if (map[y][x] == nullptr) {
+                // Do nothing
+            }
+            else {
+                std::cout << "ha" << std::endl;
+                delete map[y][x];
+            }
+        }
+    }
+    map.clear();
+
     // Export shortest path
     std::ofstream out_path{"path.csv"};
     out_path << "x" << "," << "y" << '\n';
