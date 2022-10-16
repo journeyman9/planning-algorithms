@@ -159,6 +159,30 @@ int main(int argc, char const *argv[]) {
     std::chrono::duration<float> duration = t1 - t0;
     std::cout << "Time: " << duration.count() << "s" << std::endl;
 
+    // Export shortest path
+    std::ofstream out_path{"path.csv"};
+    out_path << "x" << "," << "y" << '\n';
+    for (const auto x: optimal_path) {
+        if (x == optimal_path.back()) {
+            out_path << x.first << ',' <<  x.second;
+        }
+        else {
+            out_path << x.first << ',' <<  x.second << '\n';
+        }
+    }
+
+    // Export visited paths
+    std::ofstream visit_path{"visit.csv"};
+    visit_path << "x" << "," << "y" << '\n';
+    for (auto it=visited.begin(); it != visited.end(); it++) {
+        if (it == visited.end()) {
+            visit_path << it->first->x << ',' << it->first->y;
+        }
+        else {
+            visit_path << it->first->x << ',' << it->first->y << '\n';
+        }
+    }
+    
     // Delete ptrs in map
     for (int x=0; x<map_width; ++x) {
         for (int y=0; y<map_height; ++y) {
@@ -171,18 +195,6 @@ int main(int argc, char const *argv[]) {
         }
     }
     map.clear();
-
-    // Export shortest path
-    std::ofstream out_path{"path.csv"};
-    out_path << "x" << "," << "y" << '\n';
-    for (const auto x: optimal_path) {
-        if (x == optimal_path.back()) {
-            out_path << x.first << ',' <<  x.second;
-        }
-        else {
-            out_path << x.first << ',' <<  x.second << '\n';
-        }
-    }
     
     return 0;
 }

@@ -1,6 +1,6 @@
 """
 Plot grid of path chosen by planner. The start or source is colored blue.
-The goal or destination is green. Obstacles are black.
+The goal or destination is yellow. Obstacles are black.
 
 python plot_path.py
 """
@@ -32,8 +32,12 @@ if __name__ == "__main__":
     # Load chosen path
     df = pd.read_csv("path.csv")
 
+    # Load visited paths
+    df_visit = pd.read_csv("visit.csv")
+
     # Plot
     fig, ax = plt.subplots(1, 1)
+    ax.scatter(df_visit["x"], df_visit["y"], color='red', alpha=0.05)
     ax.imshow(graph, cmap=plt.cm.Dark2)
     ax.scatter(start[1], start[0], marker='*', color='blue', s=200)
     ax.scatter(goal[1], goal[0], marker='*', color='green', s=200)
