@@ -1,0 +1,4 @@
+depth: 7
+num_iter: 50
+num_rollout: 5
+exploration_weight: 1.4
