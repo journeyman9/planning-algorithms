@@ -85,7 +85,6 @@ std::vector<int> pre_order_iterative(TreeNode* root) {
     std::stack<TreeNode*> S;
     S.push(root);
 
-    std::vector<int> branch;
     TreeNode *curr;
 
     while (!S.empty()) {
@@ -105,6 +104,62 @@ std::vector<int> pre_order_iterative(TreeNode* root) {
     return path;
 }
 
+std::vector<int> in_order_iterative(TreeNode* root) {
+    std::vector<int> path;
+    if (root == nullptr) {
+        return path;
+    }
+
+    std::stack<TreeNode*> S;
+    TreeNode *curr = root;
+
+    while (curr != nullptr || !S.empty()) {
+        while (curr != nullptr) {
+            S.push(curr);
+            curr = curr->left;
+        }
+        curr = S.top();
+        S.pop();
+        path.push_back(curr->val);
+
+        curr = curr->right;
+    }
+
+    return path;
+}
+
+std::vector<int> post_order_iterative(TreeNode* root) {
+    std::vector<int> path;
+    if (root == nullptr) {
+        return path;
+    }
+
+    std::stack<TreeNode*> S1, S2;
+    TreeNode *curr = root;
+    S1.push(curr);
+
+    while (!S1.empty()) {
+        curr = S1.top();
+        S1.pop();
+        S2.push(curr);
+
+        if (curr->left != nullptr) {
+            S1.push(curr->left);
+        }
+        if (curr->right != nullptr) {
+            S1.push(curr->right);
+        }
+    }
+
+    while (!S2.empty()) {
+        curr = S2.top();
+        S2.pop();
+        path.push_back(curr->val);
+    }
+
+    return path;
+}
+
 int main() {
     int tree[] = {3, 9, 20, NULL, NULL, 15, 7};
     int n = sizeof(tree) / sizeof(tree[0]);
@@ -116,7 +171,9 @@ int main() {
     //std::vector<int> path = post_order(root);
 
     // Iterative
-    std::vector<int> path = pre_order_iterative(root);
+    //std::vector<int> path = pre_order_iterative(root);
+    //std::vector<int> path = in_order_iterative(root);
+    std::vector<int> path = post_order_iterative(root);
 
     for (auto x: path) {
         std::cout << x << ",";
