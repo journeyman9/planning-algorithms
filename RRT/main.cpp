@@ -26,7 +26,7 @@ double distance(Node *one, Node *two) {
 
 bool check_collision(Node* near_node, double corr_x, double corr_y, std::vector<std::vector<double>> obstacles_x, std::vector<std::vector<double>> obstacles_y) {
     double min_x, min_y, max_x, max_y, m, y, x;
-    bool decision;
+    bool decision = false;
     for (int i=0; i<obstacles_x.size(); i++) {
         min_x = *std::min_element(obstacles_x[i].begin(), obstacles_x[i].end());
         min_y = *std::min_element(obstacles_y[i].begin(), obstacles_y[i].end());
@@ -39,7 +39,7 @@ bool check_collision(Node* near_node, double corr_x, double corr_y, std::vector<
             (near_node->x >= max_x && corr_x >= max_x) ||
             (near_node->y >= max_y && corr_y >= max_y)) {
             
-            decision = false;
+            continue;
         }
 
         m = (corr_y - near_node->y) / (corr_x - near_node->x);
@@ -136,11 +136,11 @@ int main() {
             }
         }
 
-        angle = std::atan2(random_node->x - near_node->x, random_node->y - near_node->y) * 180 / M_PI;
+        angle = std::atan2(random_node->y - near_node->y, random_node->x - near_node->x);
 
         if (min_distance > max_distance) {
-            corr_x = std::abs(near_node->x + std::cos(angle) * max_distance);
-            corr_y = std::abs(near_node->y + std::sin(angle) * max_distance);
+            corr_x = near_node->x + std::cos(angle) * max_distance;
+            corr_y = near_node->y + std::sin(angle) * max_distance;
         }
 
         if (min_distance <= max_distance) {

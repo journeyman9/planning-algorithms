@@ -1,9 +1,11 @@
 #include <iostream> 
 #include <vector>
 #include <unordered_map>
-#include <string>
+#include <stack>
 using namespace std;
 
+/*
+// Recursive
 bool dfs(unordered_map<int, vector<int>>& graph, vector<bool>& visited, int curr, int dest) {
     if (curr == dest) {
         return true;
@@ -29,6 +31,42 @@ bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
     vector<bool> visited(n);
     return dfs(graph, visited, source, destination);
 
+}
+*/
+
+bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+    unordered_map<int, vector<int>> graph;
+    for (auto& edge: edges) {
+        graph[edge[0]].push_back(edge[1]);
+        graph[edge[1]].push_back(edge[0]);
+    }
+    
+    vector<bool> visited(n, false);
+    stack<int> S;
+
+    S.push(source);
+    visited[source] = true;
+    int curr;
+
+    while (!S.empty()) {
+        curr = S.top();
+        S.pop();
+
+        if (curr == destination) {
+            return true;
+        }
+        
+        for (auto& neighbor: graph[curr]) {
+            if (visited[neighbor]) {
+                continue;
+            }
+            
+            visited[neighbor] = true;
+            S.push(neighbor);
+        }
+        
+    }
+    return false;
 }
 
 int main() {
